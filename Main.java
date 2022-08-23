@@ -20,7 +20,7 @@ public class Main extends Application {
 			
 		} catch(Exception e) {
 			e.printStackTrace();
-			System.out.println(" Ocorreu uma exceção...");
+			System.out.println(" Algo não ocorreu bem...");
 		}
 	}
 	

@@ -25,22 +25,25 @@ public class DadoController {
     private Button btnVRFC;
 	
 	@FXML
-    private TextField txtLBL_1;
+    private Label lblFCE_1;
 
     @FXML
-    private TextField txtLBL_2;
+    private Label lblFCE_2;
 
     @FXML
-    private TextField txtLBL_3;
+    private Label lblFCE_3;
 
     @FXML
-    private TextField txtLBL_4;
+    private Label lblFCE_4;
 
     @FXML
-    private TextField txtLBL_5;
+    private Label lblFCE_5;
 
     @FXML
-    private TextField txtLBL_6;
+    private Label lblFCE_6;
+    
+    @FXML
+    private Label lblMsg;
 
 
 	@FXML
@@ -52,7 +55,7 @@ public class DadoController {
 	void txtFldRLS_VLR(KeyEvent event) {
 		
 		TextFieldFormatter txtFldFMT = new TextFieldFormatter();
-		txtFldFMT.setMask("###");
+		txtFldFMT.setMask("######");
 		txtFldFMT.setCaracteresValidos("0123456789");
 		txtFldFMT.setTf(txtFld_VLR);
 		txtFldFMT.formatter();
@@ -60,13 +63,13 @@ public class DadoController {
 	
 	@FXML
 	public void onClickedBtn(ActionEvent event) {
-		
-		String dadoTxtFLD_VLR = txtFld_VLR.getText();
-		
-		String dadoNumberOnly = dadoTxtFLD_VLR.replaceAll("[^0-9]", "");
 	
+		String dadoTxtFLD_VLR = txtFld_VLR.getText();
+		String dadoNumberOnly = dadoTxtFLD_VLR.replaceAll("[^0-9]", "");
 		int valorDaRodada = Integer.parseInt(dadoTxtFLD_VLR  );
-		  
+		lblMsg.setText(" Acrescente valores maiores que 100 ");
+		
+				  
 		System.out.print(" -> converted: " + valorDaRodada);
 		Integer  valor = (Integer) valorDaRodada;
 		 
@@ -81,34 +84,40 @@ public class DadoController {
 		Integer face6 = jogadorVisual.get("Número 6: ");
 		
 		String  valor_1 = String.valueOf(face1);
-		txtLBL_1.setDisable(false);
-		txtLBL_1.setVisible(true);
-		txtLBL_1.setText(valor_1);
+		lblFCE_1.setDisable(false);
+		lblFCE_1.setVisible(true);
+		lblFCE_1.setTextFill(Color.RED);
+		lblFCE_1.setText(valor_1);
 		
 		String  valor_2 = String.valueOf(face2);
-		txtLBL_2.setDisable(false);
-		txtLBL_2.setVisible(true);
-		txtLBL_2.setText(valor_2);
+		lblFCE_2.setDisable(false);
+		lblFCE_2.setVisible(true);
+		lblFCE_2.setTextFill(Color.RED);
+		lblFCE_2.setText(valor_2);
 		
 		String  valor_3 = String.valueOf(face3);
-		txtLBL_3.setDisable(false);
-		txtLBL_3.setVisible(true);
-		txtLBL_3.setText(valor_3);
+		lblFCE_3.setDisable(false);
+		lblFCE_3.setVisible(true);
+		lblFCE_3.setTextFill(Color.RED);
+		lblFCE_3.setText(valor_3);
 		
 		String  valor_4 = String.valueOf(face4);
-		txtLBL_4.setDisable(false);
-		txtLBL_4.setVisible(true);
-		txtLBL_4.setText(valor_4);
+		lblFCE_4.setDisable(false);
+		lblFCE_4.setVisible(true);
+		lblFCE_4.setTextFill(Color.RED);
+		lblFCE_4.setText(valor_4);
 		
 		String  valor_5 = String.valueOf(face5);
-		txtLBL_5.setDisable(false);
-		txtLBL_5.setVisible(true);		
-		txtLBL_5.setText(valor_5);
+		lblFCE_5.setDisable(false);
+		lblFCE_5.setVisible(true);	
+		lblFCE_5.setTextFill(Color.RED);
+		lblFCE_5.setText(valor_5);
 		
 		String  valor_6 = String.valueOf(face6);
-		txtLBL_6.setDisable(false);
-		txtLBL_6.setVisible(true);
-		txtLBL_6.setText(valor_6);
+		lblFCE_6.setDisable(false);
+		lblFCE_6.setVisible(true);
+		lblFCE_6.setTextFill(Color.RED);
+		lblFCE_6.setText(valor_6);
 		
 	}
 	// Algoritmo para transformação dos itens em um Map
@@ -116,15 +125,19 @@ public class DadoController {
 
 		TreeMap<String , Integer> valoresEncontrados = new TreeMap<>();
 
-		int somatorioUm = 0;
-		int somatorioDois = 0;
-		int somatorioTres = 0;
-		int somatorioQuatro = 0;
-		int somatorioCinco = 0;
-		int somatorioSeis = 0;
-		int quantidadeJogada = quantidade + 6;
-		for (int i = 0; i < quantidadeJogada; i++) {
+		int somatorioUm      = 0;
+		int somatorioDois    = 0;
+		int somatorioTres    = 0;
+		int somatorioQuatro  = 0;
+		int somatorioCinco   = 0;
+		int somatorioSeis    = 0;
+		
+		int quantidadeJogadaMaisErro = quantidade ;
+		
+		for (int contadorJogadasMinimo = 1; contadorJogadasMinimo <= quantidadeJogadaMaisErro ; contadorJogadasMinimo++ ) {
+
 			int valorEncontrado  = gerarNumerosInteirosAleatorios(1 , 6);
+
 			switch(valorEncontrado) {
 			case (1):{
 				valoresEncontrados.put("Número 1: ", somatorioUm++);
@@ -152,15 +165,13 @@ public class DadoController {
 			}
 
 			}
-
 		}
-		
 		return valoresEncontrados;
 	}
-	
+
 	public static int gerarNumerosInteirosAleatorios(int min, int max) {
-    	Random random = new Random();
-    	int valorEncontrado = random.nextInt((max + 1) - min) + min;
+		Random random = new Random();
+		int valorEncontrado = random.nextInt((max + 1) - min) + min;
   		return valorEncontrado;
     }
 	
