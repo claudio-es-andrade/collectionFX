@@ -67,10 +67,10 @@ public class DadoController {
 		String dadoTxtFLD_VLR = txtFld_VLR.getText();
 		String dadoNumberOnly = dadoTxtFLD_VLR.replaceAll("[^0-9]", "");
 		int valorDaRodada = Integer.parseInt(dadoTxtFLD_VLR  );
-		lblMsg.setText(" Acrescente valores maiores que 100 ");
+		//lblMsg.setText(" Acrescente valores maiores que 100 ");
 		
 				  
-		System.out.print(" -> converted: " + valorDaRodada);
+		//System.out.println(" -> converted: " + valorDaRodada);
 		Integer  valor = (Integer) valorDaRodada;
 		 
 		TreeMap<String, Integer> jogadorVisual   =  new TreeMap<>();
@@ -124,6 +124,12 @@ public class DadoController {
 	public static TreeMap<String , Integer> jogarDado(int quantidade){
 
 		TreeMap<String , Integer> valoresEncontrados = new TreeMap<>();
+		valoresEncontrados.put("Número 1: ", 0);
+		valoresEncontrados.put("Número 2: ", 0);
+		valoresEncontrados.put("Número 3: ", 0);
+		valoresEncontrados.put("Número 4: ", 0);
+		valoresEncontrados.put("Número 5: ", 0);
+		valoresEncontrados.put("Número 6: ", 0);
 
 		int somatorioUm      = 0;
 		int somatorioDois    = 0;
@@ -132,35 +138,43 @@ public class DadoController {
 		int somatorioCinco   = 0;
 		int somatorioSeis    = 0;
 		
-		int quantidadeJogadaMaisErro = quantidade ;
+		//int quantidadeJogadaMaisErro = quantidade ;
+		//System.out.println("Quantidade: " + quantidade);
 		
-		for (int contadorJogadasMinimo = 1; contadorJogadasMinimo <= quantidadeJogadaMaisErro ; contadorJogadasMinimo++ ) {
+		for (int contadorJogadasMinimo = 1; contadorJogadasMinimo <= quantidade ; contadorJogadasMinimo++ ) {
 
 			int valorEncontrado  = gerarNumerosInteirosAleatorios(1 , 6);
+			//System.out.println("Valor Encontrado: " + valorEncontrado);
 
 			switch(valorEncontrado) {
 			case (1):{
-				valoresEncontrados.put("Número 1: ", somatorioUm++);
+				somatorioUm += 1;
+				valoresEncontrados.put("Número 1: ", somatorioUm  );
 				break;
 			}
 			case (2):{
-				valoresEncontrados.put("Número 2: ", somatorioDois++);
+				somatorioDois += 1;
+				valoresEncontrados.put("Número 2: ", somatorioDois  );
 				break;
 			}
 			case (3):{
-				valoresEncontrados.put("Número 3: ", somatorioTres++);
+				somatorioTres += 1;
+				valoresEncontrados.put("Número 3: ", somatorioTres  );
 				break;
 			}
 			case (4):{
-				valoresEncontrados.put("Número 4: ", somatorioQuatro++);
+				somatorioQuatro += 1;
+				valoresEncontrados.put("Número 4: ", somatorioQuatro  );
 				break;
 			}
 			case (5):{
-				valoresEncontrados.put("Número 5: ", somatorioCinco++);
+				somatorioCinco += 1;
+				valoresEncontrados.put("Número 5: ", somatorioCinco   );
 				break;
 			}
 			case (6):{
-				valoresEncontrados.put("Número 6: ", somatorioSeis++);
+				somatorioSeis += 1;
+				valoresEncontrados.put("Número 6: ", somatorioSeis  );
 				break;
 			}
 
@@ -171,7 +185,8 @@ public class DadoController {
 
 	public static int gerarNumerosInteirosAleatorios(int min, int max) {
 		Random random = new Random();
-		int valorEncontrado = random.nextInt((max + 1) - min) + min;
+		int valorEncontrado = random.nextInt(max  - min) + min;
+		//System.out.println("Valor Encontrado dentro de Gerar Numeros Aleatorios " + valorEncontrado);
   		return valorEncontrado;
     }
 	
